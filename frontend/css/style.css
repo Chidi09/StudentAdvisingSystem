@@ -1,0 +1,699 @@
+/* frontend/css/style.css - Enhanced and Polished Version */
+
+:root {
+    /* Light Mode Color Palette (Default) */
+    --bg-page: #f0f2f5;
+    --bg-card: #ffffff;
+    --bg-table-header: #e9ecef; /* Slightly adjusted for better contrast */
+    --bg-input: #ffffff;
+    --bg-input-focus: #f8f9fa; /* Background for focused input */
+    --bg-button-primary: #1a237e;
+    --bg-button-primary-hover: #202b94; /* Slightly lighter hover for primary */
+    --bg-button-primary-active: #10164c; /* Darker active */
+    --bg-button-secondary: #6c757d; /* Added a secondary button style */
+    --bg-button-secondary-hover: #5a6268;
+    --bg-button-danger: #dc3545;
+    --bg-button-danger-hover: #c82333;
+    --bg-table-row-even: #f8f9fa; /* Adjusted for subtle striping */
+    --bg-table-row-hover: #e9ecef; /* Adjusted hover for table rows */
+
+    --text-primary: #212529; /* Slightly darker for better readability */
+    --text-secondary: #6c757d;
+    --text-body: #343a40; /* Using a consistent body text color */
+    --text-label: #495057; /* Slightly adjusted label color */
+    --text-link: #1a237e;
+    --text-link-hover: #10164c;
+    --text-on-primary: #ffffff;
+    --text-on-secondary: #ffffff; /* Text on secondary buttons */
+    --text-on-danger: #ffffff;
+    --text-placeholder: #6c757d;
+
+    --border-primary: #dee2e6;
+    --border-card: #e0e0e0; /* Softer card border */
+    --border-input: #ced4da; /* Standard input border */
+    --border-input-focus: #80bdff; /* Focus border to match Bootstrap-like focus */
+    --border-table: #dee2e6;
+    --border-table-header: #ced4da;
+    --border-dashed: #d1d9e1; /* Slightly more visible dashed border */
+
+    --shadow-sm: 0 .125rem .25rem rgba(0, 0, 0, .075); /* Softer small shadow */
+    --shadow-md: 0 .5rem 1rem rgba(0, 0, 0, .1);    /* Softer medium shadow for cards */
+    --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, .125);   /* Softer large shadow */
+    
+    --input-focus-shadow-color: rgba(26, 35, 126, 0.25); /* More pronounced focus shadow */
+
+    --border-radius-sm: .2rem;
+    --border-radius-md: .375rem; /* Slightly more rounded standard radius */
+    --border-radius-lg: .5rem;
+
+    --transition-speed-fast: 0.15s;
+    --transition-speed-normal: 0.25s;
+    --transition-timing-function: ease-in-out;
+}
+
+body.dark-mode {
+    /* Dark Mode Color Palette */
+    --bg-page: #121212;
+    --bg-card: #1e1e1e;
+    --bg-table-header: #2c2f33; /* Adjusted dark table header */
+    --bg-input: #2a2a2a; 
+    --bg-input-focus: #333333;
+    --bg-button-primary: #4a5fc1; /* Brighter primary button for dark mode */
+    --bg-button-primary-hover: #5a6fde;
+    --bg-button-primary-active: #3a4db0;
+    --bg-button-secondary: #495057;
+    --bg-button-secondary-hover: #5c6670;
+    --bg-button-danger: #c05252; /* Adjusted danger for dark mode */
+    --bg-button-danger-hover: #d66363;
+    --bg-table-row-even: #232323;
+    --bg-table-row-hover: #2f2f2f; /* Adjusted dark table row hover */
+
+    --text-primary: #e0e0e0;
+    --text-secondary: #adb5bd; /* Lighter secondary text */
+    --text-body: #ced4da;
+    --text-label: #b0b0b0;
+    --text-link: #7986cb;
+    --text-link-hover: #9fa8da;
+    --text-on-primary: #ffffff;
+    --text-on-secondary: #ffffff;
+    --text-on-danger: #ffffff; /* Keeping text on danger white for now */
+    --text-placeholder: #868e96;
+
+    --border-primary: #495057; /* Darker primary border */
+    --border-card: #333333; /* Softer dark card border */
+    --border-input: #454545; /* Darker input border */
+    --border-input-focus: #5897fb; /* Dark mode focus border */
+    --border-table: #454545; /* Darker table border */
+    --border-table-header: #505050;
+    --border-dashed: #404040; /* Darker dashed border */
+
+    --shadow-sm: 0 .125rem .25rem rgba(255, 255, 255, .035);
+    --shadow-md: 0 .5rem 1rem rgba(255, 255, 255, .05);
+    --shadow-lg: 0 1rem 3rem rgba(255, 255, 255, .075);
+    
+    --input-focus-shadow-color: rgba(121, 134, 203, 0.35); /* Adjusted focus shadow for dark */
+}
+
+/* Basic Reset & Body Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Added for smooth scrolling on page jumps */
+}
+
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; /* Modernized font stack */
+    background-color: var(--bg-page); 
+    color: var(--text-body);      
+    line-height: 1.6;
+    transition: background-color var(--transition-speed-normal) var(--transition-timing-function), 
+                color var(--transition-speed-normal) var(--transition-timing-function); /* Transition for theme toggle */
+}
+
+/* Applied to login page and other similar centered content pages */
+.login-page-container {
+    width: 100%;
+    padding: 20px; 
+    display: flex; /* Added for vertical centering of the card if body doesn't handle it */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* The Login Card Itself & Other general cards */
+.login-card, .dashboard-card { /* Combined common card styles */
+    background-color: var(--bg-card); 
+    padding: 30px 40px; 
+    border-radius: var(--border-radius-lg); /* Using new radius variable */ 
+    box-shadow: var(--shadow-md); /* Using new shadow variable */
+    width: 100%; 
+    margin-bottom: 30px; /* Added margin for dashboard cards */
+    transition: background-color var(--transition-speed-normal) var(--transition-timing-function), 
+                box-shadow var(--transition-speed-normal) var(--transition-timing-function),
+                transform var(--transition-speed-fast) var(--transition-timing-function); /* Added transition for potential hover */
+}
+
+.login-card { /* Specifics for login card */
+    max-width: 480px; /* Slightly wider */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.login-card:hover, .dashboard-card:hover { /* Subtle hover effect for cards */
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Card Header */
+.login-card-header, .dashboard-card h2 {
+    margin-bottom: 25px; 
+    text-align: center;
+    color: var(--text-primary); /* Ensure h2 uses primary text */
+}
+
+.login-card-header h1 {
+    font-size: 2em; /* Slightly larger */
+    color: var(--text-link); 
+    margin-bottom: 8px;
+}
+
+.login-card-header .subtitle {
+    font-size: 1.1em;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+/* Card Body */
+.login-card-body h2 { /* For subheadings within card body if used */
+    font-size: 1.6em;
+    color: var(--text-primary);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Form Styling */
+#login-form, #submitGradeForm, #add-note-form, #change-password-form, #forgot-password-student-form { /* Applied to all forms */
+    text-align: left; 
+}
+
+.input-group {
+    margin-bottom: 20px; 
+}
+
+.input-group label {
+    display: block; 
+    font-weight: 500; /* Slightly less bold */
+    margin-bottom: 8px; 
+    color: var(--text-label);
+    font-size: 0.95em;
+}
+
+.input-group input[type="text"],
+.input-group input[type="password"],
+.input-group input[type="email"],   /* Added email type */
+.input-group input[type="number"],  /* Added number type */
+.input-group textarea {             /* Added textarea */
+    width: 100%; 
+    padding: 12px 15px; 
+    border: 1px solid var(--border-input); 
+    background-color: var(--bg-input);
+    color: var(--text-primary); /* Ensure input text uses primary color */
+    border-radius: var(--border-radius-md); 
+    font-size: 1em;
+    transition: border-color var(--transition-speed-fast) var(--transition-timing-function), 
+                box-shadow var(--transition-speed-fast) var(--transition-timing-function),
+                background-color var(--transition-speed-fast) var(--transition-timing-function); 
+}
+.input-group textarea { /* Specifics for textarea */
+    min-height: 80px;
+    resize: vertical;
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+    color: var(--text-placeholder);
+    opacity: 1; 
+}
+/* ... (IE/Edge placeholder styles remain the same) ... */
+
+.input-group input[type="text"]:focus,
+.input-group input[type="password"]:focus,
+.input_group input[type="email"]:focus,
+.input-group input[type="number"]:focus,
+.input-group textarea:focus {
+    outline: none; 
+    border-color: var(--input-focus-border); 
+    box-shadow: 0 0 0 .2rem var(--input-focus-shadow-color); /* Bootstrap-like focus shadow */
+    background-color: var(--bg-input-focus);
+}
+
+/* Button Styling */
+.submit-btn, .action-btn, .logout-btn, .theme-toggle-btn { /* Common button styles */
+    padding: 10px 20px; /* Adjusted padding */
+    border: none;
+    border-radius: var(--border-radius-md);
+    font-size: 1em; /* Normalized font size */
+    font-weight: 600;
+    cursor: pointer; 
+    transition: background-color var(--transition-speed-fast) var(--transition-timing-function), 
+                box-shadow var(--transition-speed-fast) var(--transition-timing-function),
+                transform var(--transition-speed-fast) var(--transition-timing-function); 
+    text-align: center;
+    text-decoration: none; /* For <a> tags styled as buttons */
+    display: inline-block; /* For <a> tags styled as buttons */
+}
+
+.submit-btn { /* Primary action button */
+    width: 100%; 
+    background-color: var(--bg-button-primary); 
+    color: var(--text-on-primary); 
+    margin-top: 10px; 
+}
+.submit-btn:hover {
+    background-color: var(--bg-button-primary-hover); 
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+}
+.submit-btn:active {
+    background-color: var(--bg-button-primary-active); 
+    transform: translateY(0px); 
+}
+
+/* Specific button for smaller actions in tables */
+.action-btn {
+    font-size: 0.85em;
+    padding: 6px 12px;
+    margin-right: 5px;
+    background-color: var(--bg-button-secondary);
+    color: var(--text-on-secondary);
+}
+.action-btn:hover {
+    background-color: var(--bg-button-secondary-hover);
+    transform: translateY(-1px);
+}
+.action-btn.view-btn {
+    background-color: #0dcaf0; /* Example: A light blue color */
+    color: black; /* Example: Text color for the new background */
+}
+.action-btn.view-btn:hover {
+    background-color: #0a9eb9; /* Darker blue on hover */
+}
+
+/* Add to your style.css if you want the two-column layout for profile info */
+.profile-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 10px 20px; /* Row gap, Column gap */
+    margin-bottom: 15px;
+}
+
+.profile-info-grid h3 { /* For subheadings like Advisor Information */
+    grid-column: 1 / -1; /* Make subheading span all columns */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-dashed);
+    padding-bottom: 5px;
+}
+/* Login Card Footer */
+.login-card-footer {
+    margin-top: 30px; 
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+.login-card-footer a {
+    color: var(--text-link); 
+    text-decoration: none;
+    transition: color var(--transition-speed-fast) var(--transition-timing-function);
+}
+.login-card-footer a:hover {
+    text-decoration: underline;
+    color: var(--text-link-hover);
+}
+
+/* Logo Styling */
+.logo {
+    max-width: 70px;  /* Slightly smaller */
+    height: auto;     
+    margin-bottom: 20px; 
+    display: block;   
+    margin-left: auto; 
+    margin-right: auto;
+}
+.styled-link {
+    color: var(--text-link);
+    text-decoration: none; /* No underline by default */
+    font-size: 0.9em;
+    padding: 5px 0; /* Add a little vertical padding if you want a larger click area or visual separation */
+    display: inline-block; /* Allows padding to take effect */
+    transition: color var(--transition-speed-fast) var(--transition-timing-function),
+                text-decoration var(--transition-speed-fast) var(--transition-timing-function);
+}
+
+.styled-link:hover,
+.styled-link:focus { /* Added focus style for accessibility */
+    color: var(--text-link-hover);
+    text-decoration: underline; /* Underline on hover/focus */
+    outline: none; /* Remove default browser outline if you prefer, or style it */
+}
+/* Theme Toggle Button Styling (inherits from common button styles) */
+.theme-toggle-btn {
+    background-color: var(--bg-card);
+    color: var(--text-link);
+    border: 1px solid var(--border-primary);
+    padding: 8px 12px; /* Slightly larger padding */
+    font-size: 1em; /* Made icon potentially larger */
+}
+.theme-toggle-btn:hover {
+    background-color: var(--bg-page);
+    color: var(--text-link-hover);
+}
+/* body.dark-mode .theme-toggle-btn styles inherited and customized by variables */
+
+
+/* ============================ */
+/* Dashboard Styles             */
+/* ============================ */
+
+body.dashboard-page {
+    display: block; /* remove flex from body for dashboard pages to allow scrolling */
+    background-color: var(--bg-page); 
+    color: var(--text-body); /* Changed from text-primary for general body text */     
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Dashboard Navigation Bar */
+.dashboard-nav {
+    background-color: var(--bg-card); 
+    padding: 12px 30px; /* Adjusted padding */
+    box-shadow: var(--shadow-sm); /* Using new shadow */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-primary);
+    position: sticky; /* Make nav sticky */
+    top: 0;
+    z-index: 1000; /* Ensure it's above other content */
+    transition: background-color var(--transition-speed-normal) var(--transition-timing-function);
+}
+
+.dashboard-nav .logo-area img { /* If you add a logo image */
+    max-height: 35px; 
+    vertical-align: middle;
+}
+.dashboard-nav .logo-area span { /* For "Crawford Advising Portal" text */
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--text-link); 
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.dashboard-nav .nav-links a {
+    color: var(--text-secondary); 
+    text-decoration: none;
+    margin-left: 25px; /* Increased spacing */
+    font-size: 1em; /* Standardized */
+    transition: color var(--transition-speed-fast) var(--transition-timing-function), 
+                transform var(--transition-speed-fast) var(--transition-timing-function);
+    padding: 5px 0; /* Add some padding for hover indication */
+    position: relative; /* For underline animation */
+}
+.dashboard-nav .nav-links a::after { /* Underline animation */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--text-link);
+    transition: width var(--transition-speed-normal) var(--transition-timing-function);
+}
+.dashboard-nav .nav-links a:hover,
+.dashboard-nav .nav-links a.active { 
+    color: var(--text-link); 
+    font-weight: 500;
+}
+.dashboard-nav .nav-links a:hover::after,
+.dashboard-nav .nav-links a.active::after {
+    width: 100%;
+}
+.dashboard-nav .nav-links a:hover { /* Subtle lift on hover */
+    transform: translateY(-2px);
+}
+
+
+.dashboard-nav .user-actions .logout-btn { /* Inherits from common button styles */
+    background-color: var(--bg-button-danger);
+    color: var(--text-on-danger);
+    font-size: 0.9em; /* Kept original size */
+}
+.dashboard-nav .user-actions .logout-btn:hover {
+    background-color: var(--bg-button-danger-hover);
+    transform: translateY(-2px); /* Added hover effect */
+}
+
+/* Main Dashboard Container */
+.dashboard-main {
+    max-width: 1200px; 
+    margin: 40px auto; /* Increased top/bottom margin */
+    padding: 0 25px; 
+}
+
+/* Welcome Header */
+.dashboard-welcome {
+    background-color: var(--bg-card);
+    padding: 25px 35px; /* Increased padding */
+    margin-bottom: 35px; /* Increased margin */
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-card);
+}
+.dashboard-welcome h1 {
+    margin: 0;
+    font-size: 2em; /* Larger welcome heading */
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.dashboard-welcome p {
+    margin-top: 8px; /* Adjusted margin */
+    color: var(--text-secondary);
+    font-size: 1.15em; /* Slightly larger subtitle */
+}
+
+/* Dashboard Content Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Slightly larger min card width */
+    gap: 35px; 
+    margin-bottom: 35px;
+}
+
+/* dashboard-card styles already defined above */
+
+.dashboard-card h2 { /* Specifics for dashboard card titles */
+    font-size: 1.5em; 
+    font-weight: 600;
+    color: var(--text-link); 
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 15px; /* Increased padding */
+    border-bottom: 1px solid var(--border-dashed); 
+    display: flex; /* For aligning icon with text */
+    align-items: center;
+}
+.dashboard-card h2 i.fas { /* Style for Font Awesome icons in h2 */
+    margin-right: 12px; /* Space between icon and text */
+    font-size: 0.9em; /* Adjust icon size relative to text */
+    color: var(--text-link); /* Icon color matches link */
+}
+
+
+/* Styling for info paragraphs within cards */
+.dashboard-card p {
+    margin-bottom: 15px; /* Increased spacing */
+    color: var(--text-body); 
+    font-size: 1em; /* Standardized */
+}
+.dashboard-card p strong {
+    color: var(--text-primary);
+    margin-right: 8px; /* Increased spacing */
+    font-weight: 600;
+}
+/* span within p already handled by text-secondary or default text-body */
+
+/* Enhanced Table Styling */
+.dashboard-card table {
+    width: 100%;
+    border-collapse: separate; /* Changed for rounded corners if desired, or keep collapse */
+    border-spacing: 0; /* Required if border-collapse is separate */
+    margin-top: 25px;
+    border: 1px solid var(--border-table);
+    border-radius: var(--border-radius-md); /* Rounded corners for the table */
+    overflow: hidden; /* To make border-radius clip children */
+}
+.dashboard-card th,
+.dashboard-card td {
+    border-bottom: 1px solid var(--border-table); 
+    padding: 12px 18px; /* Increased padding */
+    text-align: left;
+    vertical-align: middle;
+    font-size: 0.95em; /* Slightly larger table text */
+    transition: background-color var(--transition-speed-fast) var(--transition-timing-function);
+}
+.dashboard-card td:last-child, .dashboard-card th:last-child {
+    border-right: none;
+}
+.dashboard-card td:first-child, .dashboard-card th:first-child {
+    border-left: none;
+}
+.dashboard-card thead th {
+    background-color: var(--bg-table-header); 
+    font-weight: 600;
+    color: var(--text-primary); 
+    border-bottom-width: 2px; 
+    border-bottom-color: var(--border-table-header); /* Stronger header underline */
+    border-top: none; /* Remove top border for headers if table has overall border */
+}
+.dashboard-card tbody tr:nth-child(even) {
+    background-color: var(--bg-table-row-even); 
+}
+.dashboard-card tbody tr:hover {
+    background-color: var(--bg-table-row-hover); 
+    transform: scale(1.005); /* Subtle scale on row hover - might need row to be display:block or table-row */
+}
+.dashboard-card tbody tr td {
+    border-top: none; /* Remove default top border from cells if using border-bottom */
+}
+.dashboard-card tbody tr:last-child td {
+    border-bottom: none; /* Remove bottom border from last row cells */
+}
+
+
+/* Resource/Notes List Styling */
+.dashboard-card ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+.dashboard-card ul li {
+    margin-bottom: 12px;
+    padding: 12px 0; /* Added vertical padding */
+    border-bottom: 1px dashed var(--border-dashed); 
+    transition: background-color var(--transition-speed-fast) var(--transition-timing-function),
+                padding-left var(--transition-speed-fast) var(--transition-timing-function); /* For hover effect */
+}
+.dashboard-card ul li:hover {
+    background-color: var(--bg-table-row-hover); /* Re-use table hover or a specific list hover var */
+    padding-left: 10px; /* Indent on hover */
+    border-radius: var(--border-radius-sm);
+}
+
+.dashboard-card ul li:last-child {
+    border-bottom: none;
+}
+.dashboard-card ul li a {
+    color: var(--text-link);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition-speed-fast) var(--transition-timing-function);
+}
+.dashboard-card ul li a:hover {
+    color: var(--text-link-hover);
+    text-decoration: underline;
+}
+.dashboard-card ul li span.category { 
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    margin-left: 8px;
+    background-color: var(--bg-page); /* Subtle background for category tag */
+    padding: 2px 6px;
+    border-radius: var(--border-radius-sm);
+}
+
+/* Message Display (for forms) */
+.message-display {
+    margin-top: 15px;
+    min-height: 1.2em; /* Ensure space even if empty */
+    text-align: center;
+    font-weight: 500;
+    padding: 8px;
+    border-radius: var(--border-radius-md);
+    opacity: 0; /* Start hidden for animation */
+    transform: translateY(10px); /* Start slightly down for animation */
+    transition: opacity var(--transition-speed-normal) var(--transition-timing-function), 
+                transform var(--transition-speed-normal) var(--transition-timing-function);
+}
+.message-display.visible { /* Add this class with JS to show message */
+    opacity: 1;
+    transform: translateY(0);
+}
+.message-display.success { /* Example class for success message */
+    color: #155724; /* Dark green text */
+    background-color: #d4edda; /* Light green background */
+    border: 1px solid #c3e6cb;
+}
+.message-display.error { /* Example class for error message */
+    color: #721c24; /* Dark red text */
+    background-color: #f8d7da; /* Light red background */
+    border: 1px solid #f5c6cb;
+}
+
+
+/* Basic Responsiveness */
+@media (max-width: 768px) {
+    .dashboard-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 20px;
+    }
+    .dashboard-nav .logo-area { /* Center logo on mobile */
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .dashboard-nav .logo-area span {
+        margin-left: 0;
+    }
+    .dashboard-nav .nav-links {
+        margin-top: 10px;
+        width: 100%;
+        display: flex;
+        flex-direction: column; /* Stack links vertically */
+        align-items: center; /* Center links */
+    }
+    .dashboard-nav .nav-links a {
+        margin-left: 0;
+        margin-bottom: 8px; /* Space between stacked links */
+        padding: 8px 10px; /* Make touch targets larger */
+        width: 100%;
+        text-align: center;
+    }
+    .dashboard-nav .nav-links a::after { /* Disable underline animation on mobile for simplicity */
+        display: none;
+    }
+
+    .dashboard-nav .user-actions {
+        margin-top: 15px;
+        align-self: center; /* Center user actions block */
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .dashboard-grid {
+        grid-template-columns: 1fr; 
+    }
+     .dashboard-main {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+    .login-card, .dashboard-card { /* Reduce padding on smaller screens */
+        padding: 20px 25px;
+    }
+    .dashboard-card h2 {
+        font-size: 1.3em;
+    }
+    .dashboard-welcome h1 {
+        font-size: 1.6em;
+    }
+}
+
+/* Old .error-message class, replaced by .message-display.error but can be kept for compatibility */
+.error-message {
+    color: var(--text-on-danger); /* Assuming --danger-accent was a button background */
+    background-color: var(--bg-button-danger);
+    padding: 8px;
+    border-radius: var(--border-radius-md);
+    font-size: 0.9em;
+    font-weight: 500;
+    text-align: center; 
+    margin-top: 10px;
+}

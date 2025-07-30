@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecturer Dashboard - Crawford Advising</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Basic Modal Styles (can be moved to style.css) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; 
+            z-index: 1001; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+        }
+        .modal-content {
+            background-color: var(--bg-card);
+            color: var(--text-body);
+            margin: 10% auto;
+            padding: 25px 35px;
+            border: 1px solid var(--border-card);
+            width: 80%;
+            max-width: 600px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .modal-header {
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-dashed);
+            margin-bottom: 20px;
+        }
+        .modal-header h2 {
+            margin: 0;
+            color: var(--text-link);
+        }
+        .close-btn {
+            color: var(--text-secondary);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1;
+        }
+        .close-btn:hover,
+        .close-btn:focus {
+            color: var(--text-primary);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .modal-body p { margin-bottom: 10px; }
+        .modal-body label { display: block; margin-top:10px; font-weight: 500;}
+        .modal-body textarea, .modal-body input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-input);
+            border-radius: var(--border-radius-md);
+            background-color: var(--bg-input);
+            color: var(--text-primary);
+            font-size: 0.95em;
+        }
+        .modal-body textarea { min-height: 100px; }
+    </style>
+</head>
+<body class="dashboard-page">
+
+    <nav class="dashboard-nav">
+        <div class="logo-area">
+            <span>Crawford Advising Portal</span>
+        </div>
+        <div class="nav-links">
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="#advisees-list">Advisees</a>
+            <a href="profile.html">Profile</a>
+            <a href="submitGrade.html">Submit Grade</a>
+            <a href="../auth/change_password.html">Change Password</a>
+            <a href="../resources/resources.html">Resources</a>
+        </div>
+        <div class="user-actions">
+            <button id="theme-toggle-button" class="theme-toggle-btn" style="margin-right: 10px;">🌙</button> 
+            <a href="#" id="logout-button" class="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <main class="dashboard-main">
+        <header class="dashboard-welcome">
+            <h1>Welcome, <span id="welcome-lecturer-name">[Lecturer Name]</span>!</h1>
+            <p>Manage your advisees and resources.</p>
+        </header>
+        
+        <section id="lecturer-info" class="dashboard-card">
+             <h2><i class="fas fa-user-tie"></i> My Information</h2>
+             <p><strong>Name:</strong> <span id="lecturer-name">[Lecturer Name]</span></p>
+             <p><strong>Email:</strong> <span id="lecturer-email">[Lecturer Email]</span></p>
+             <p><strong>Department:</strong> <span id="lecturer-dept">[Lecturer Department]</span></p>
+             <p><strong>Office:</strong> <span id="lecturer-office">[Lecturer Office]</span></p>
+        </section>
+
+        <section id="advisees-list" class="dashboard-card">
+            <h2><i class="fas fa-users"></i> My Advisees</h2>
+            <p>List of students assigned to you.</p> 
+            <table id="advisees-table">
+                <thead>
+                    <tr>
+                        <th>Matric No</th><th>Name</th><th>Email</th><th>Degree Program</th><th>GPA</th><th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        <section id="view-advisee-results-section" class="dashboard-card" style="display: none;">
+            <h2><i class="fas fa-graduation-cap"></i> Academic Results for <span id="viewing-results-for-advisee-name">[Advisee Name]</span></h2>
+            <table id="advisee-results-table">
+                <thead>
+                    <tr>
+                        <th>Course Code</th><th>Course Title</th><th>Units</th><th>Semester</th><th>Grade</th><th>Grade Points</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button id="close-advisee-results-btn" class="submit-btn" style="margin-top: 15px; width:auto; background-color: var(--bg-button-secondary);">Close Results</button>
+        </section>
+
+        <section id="add-note-section" class="dashboard-card">
+             <h2><i class="fas fa-pencil-alt"></i> Add New Advising Note</h2>
+             <p>Select an advisee's "Add Note" button to begin.</p> 
+             <form id="add-note-form">
+                 <div class="input-group"><label for="note-content">Note Content:</label>
+                     <textarea id="note-content" name="content" rows="4" required></textarea>
+                 </div>
+                 <button type="submit" class="submit-btn" style="width: auto;">Save Note</button>
+                 <span id="add-note-status" class="message-display" style="margin-left: 15px;"></span>
+             </form>
+        </section>
+
+        <section id="view-notes-section" class="dashboard-card" style="display: none;">
+             <h2><i class="fas fa-clipboard-list"></i> Advising Notes for <span id="viewing-notes-for-advisee-header">[Advisee Name]</span></h2>
+             <ul id="view-notes-list" style="list-style: none; padding: 0;"></ul>
+             <button id="close-advisee-notes-btn" class="submit-btn" style="margin-top: 15px; width:auto; background-color: var(--bg-button-secondary);">Close Notes</button>
+        </section>
+
+        <section id="quick-links" class="dashboard-card">
+             <h2><i class="fas fa-link"></i> Quick Links / Resources</h2>
+             <ul id="resource-list"></ul>
+        </section>
+    </main> 
+
+    <div id="adviseeDetailsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close-btn" onclick="closeModal('adviseeDetailsModal')">&times;</span>
+                <h2>Advisee Details: <span id="modal-advisee-name"></span></h2>
+            </div>
+            <div class="modal-body">
+                <p><strong>Matric No:</strong> <span id="modal-advisee-matric"></span></p>
+                <p><strong>Email:</strong> <span id="modal-advisee-email"></span></p>
+                <p><strong>Degree:</strong> <span id="modal-advisee-degree"></span></p>
+                <p><strong>Overall GPA:</strong> <span id="modal-advisee-gpa"></span></p>
+                <hr>
+                <h4>Guardian Information</h4>
+                <p><strong>Guardian Name:</strong> <span id="modal-guardian-name"></span></p>
+                <p><strong>Guardian Email:</strong> <span id="modal-guardian-email"></span></p>
+                <p><strong>Guardian Phone:</strong> <span id="modal-guardian-phone"></span></p>
+                <p><strong>Relationship:</strong> <span id="modal-guardian-relationship"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="contactGuardianModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close-btn" onclick="closeModal('contactGuardianModal')">&times;</span>
+                <h2>Contact Guardian for <span id="modal-contact-advisee-name"></span></h2>
+            </div>
+            <div class="modal-body">
+                <form id="contactGuardianForm">
+                    <input type="hidden" id="contact-advisee-id">
+                    <input type="hidden" id="contact-guardian-email-hidden">
+                    
+                    <p><strong>To:</strong> <span id="modal-contact-guardian-email-display"></span></p>
+                    
+                    <label for="contact-subject">Subject:</label>
+                    <input type="text" id="contact-subject" name="subject" required>
+                    
+                    <label for="contact-message-body">Message:</label>
+                    <textarea id="contact-message-body" name="message_body" rows="6" required></textarea>
+                    
+                    <div>
+                        <input type="checkbox" id="contact-is-urgent" name="is_urgent" style="width:auto; margin-right: 5px;">
+                        <label for="contact-is-urgent" style="display:inline; font-weight:normal;">Mark as Urgent</label>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" style="margin-top:20px;">Send Email</button>
+                    <div id="contact-guardian-status" class="message-display" style="margin-top:10px;"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
