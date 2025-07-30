@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Lecturer Advising</title>
+    <link rel="stylesheet" href="../css/style.css">
+    </head>
+<body class="dashboard-page"> <nav class="dashboard-nav">
+        <div class="logo-area">
+            <span>Crawford Advising Portal</span>
+        </div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="dashboard.html#advisees-list">Advisees</a> <a href="profile.html" class="active">Profile</a>
+            <a href="submitGrade.html">Submit Grade</a>
+            <a href="../auth/change_password.html">Change Password</a>
+            <a href="dashboard.html#quick-links">Resources</a> </div>
+        <div class="user-actions">
+            <button id="theme-toggle-button" class="theme-toggle-btn" style="margin-right: 10px;">🌙</button>
+            <button id="logout-button" class="logout-btn">Logout</button>
+        </div>
+    </nav>
+
+    <main class="dashboard-main">
+        <header class="dashboard-welcome">
+            <h1>My Profile</h1>
+            <p>View and manage your personal information.</p>
+            <div style="margin-top: 15px;">
+                <a href="dashboard.html" class="submit-btn" style="width: auto; padding: 8px 15px; font-size: 0.9em; background-color: var(--bg-button-secondary); text-decoration: none;">
+                    <i class="fas fa-arrow-left" style="margin-right: 5px;"></i> Back to Dashboard
+                </a>
+            </div>
+        </header>
+
+        <div class="dashboard-grid" style="grid-template-columns: 1fr;"> <section id="lecturer-profile-card" class="dashboard-card">
+                <h2><i class="fas fa-user-tie"></i> My Information</h2>
+                
+                <p><strong>Full Name:</strong> <span id="profile-lecturer-fullname">[Loading...]</span></p>
+                <p><strong>Email Address:</strong> <span id="profile-lecturer-email">[Loading...]</span></p>
+                <p><strong>Department:</strong> <span id="profile-lecturer-dept">[Loading...]</span></p>
+                <p><strong>Office Location:</strong> <span id="profile-lecturer-office">[Loading...]</span></p>
+                
+                <div style="margin-top: 30px; text-align: center;">
+                    <a href="../auth/change_password.html" class="submit-btn" style="width: auto; background-color: var(--bg-button-secondary);">Change My Password</a>
+                    </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="profile.js"></script>
+</body>
+</html>

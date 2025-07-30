@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Grade - Crawford Advising</title>
+    <link rel="stylesheet" href="../css/style.css"> </head>
+<body class="dashboard-page"> <main class="login-page-container"> 
+        <div class="login-card"> 
+            <header class="login-card-header">
+                <h1>Submit Student Grade</h1>
+                <div style="position: absolute; top: 20px; right: 20px;">
+                    <button id="theme-toggle-button" class="theme-toggle-btn">🌙</button>
+                </div>
+            </header>
+
+            <section class="login-card-body">
+                <form id="submitGradeForm">
+                    <div class="input-group">
+                        <label for="studentId">Student ID:</label>
+                        <input type="text" id="studentId" name="student_id" placeholder="Enter Student ID (e.g., 1)" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="courseId">Course ID:</label>
+                        <input type="text" id="courseId" name="course_id" placeholder="Enter Course ID (e.g., 1)" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="grade">Grade:</label>
+                        <input type="text" id="grade" name="grade" placeholder="e.g., A, B+, C" required maxlength="5">
+                    </div>
+                    <div class="input-group">
+                        <label for="semester">Semester:</label>
+                        <input type="text" id="semester" name="semester" placeholder="e.g., 2023/2024 - Semester 1" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="gpa">Grade Points (for course):</label>
+                        <input type="number" id="gpa" name="gpa" step="0.01" placeholder="e.g., 5.0, 4.0"> 
+                        </div>
+                    <button type="submit" class="submit-btn">Submit Grade</button>
+                    <div id="submit-grade-message" class="message-display" style="margin-top: 15px; text-align:center; min-height: 1em;">
+                        </div>
+                </form>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="dashboard.html" class="styled-link">Back to Lecturer Dashboard</a>
+                </div>
+            </section>
+
+            <footer class="login-card-footer">
+                 <p>&copy; 2025 Crawford University. All rights reserved.</p>
+            </footer>
+        </div>
+    </main>
+    <script src="submitGrade.js"></script>
+</body>
+</html>
